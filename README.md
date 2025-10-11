@@ -21,7 +21,7 @@ A modern, responsive, and interactive Google Reviews carousel widget built with 
 
 ## 🚀 Demo
 
-**[View Live Demo](https://RaynoxDevs.github.io/google-reviews-widget/)**
+**[View Live Demo](https://RaynoxDevs.github.io/google-review-widget/)**
 
 ## 📸 Screenshots
 
