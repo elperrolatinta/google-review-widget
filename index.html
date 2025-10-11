@@ -477,8 +477,8 @@
 
         function updateSlider() {
             if (window.innerWidth <= 768) {
-                // Mobile: 1 card à la fois, centré parfaitement avec marges
-                const cardWidth = slider.children[0].offsetWidth;
+                // Mobile: 1 card à la fois, centré parfaitement
+                const cardWidth = slider.children[0].offsetWidth + 40; // card width + marges (20px * 2)
                 
                 slider.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
                 
