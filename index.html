@@ -49,8 +49,8 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             pointer-events: none;
-            min-height: 320px;
-            max-height: 320px;
+            min-height: 280px;
+            max-height: 280px;
             display: flex;
             flex-direction: column;
         }
@@ -195,14 +195,17 @@
             }
 
             .reviews-container {
-                padding: 0 15px;
+                padding: 0;
+                max-width: 100%;
             }
 
             .review-card {
-                flex: 0 0 100%;
-                margin: 0;
-                min-height: 350px;
-                max-height: 350px;
+                flex: 0 0 calc(100vw - 40px);
+                min-width: calc(100vw - 40px);
+                max-width: calc(100vw - 40px);
+                margin: 0 20px;
+                min-height: 310px;
+                max-height: 310px;
             }
             
             .reviews-slider {
@@ -260,7 +263,7 @@
             <!-- Review 1 - Maggy Porchet -->
             <div class="review-card">
                 <div class="review-header">
-                    <img src="https://via.placeholder.com/48" alt="Maggy Porchet" class="review-avatar" draggable="false">
+                    <img src="https://i.ibb.co/FSM9vds/maggy.png" alt="Maggy Porchet" class="review-avatar" draggable="false">
                     <div class="review-info">
                         <div class="review-author">Maggy Porchet</div>
                         <div class="review-meta">@MaggyCorchet • 1 year ago</div>
@@ -287,7 +290,7 @@
             <!-- Review 2 - Nora El Barni -->
             <div class="review-card">
                 <div class="review-header">
-                    <img src="https://via.placeholder.com/48" alt="Nora El Barni" class="review-avatar" draggable="false">
+                    <img src="https://i.ibb.co/1YJSdXvv/nora.png" alt="Nora El Barni" class="review-avatar" draggable="false">
                     <div class="review-info">
                         <div class="review-author">Nora El Barni</div>
                         <div class="review-meta">@NoraElBarni • 1 year ago</div>
@@ -314,7 +317,7 @@
             <!-- Review 3 - Sviatlana Langlemez -->
             <div class="review-card">
                 <div class="review-header">
-                    <img src="https://via.placeholder.com/48" alt="Sviatlana Langlemez" class="review-avatar" draggable="false">
+                    <img src="https://i.ibb.co/G4nLGBqS/sv.png" alt="Sviatlana Langlemez" class="review-avatar" draggable="false">
                     <div class="review-info">
                         <div class="review-author">Sviatlana Langlemez</div>
                         <div class="review-meta">@SviatlanaLanglemez • 1 year ago</div>
@@ -474,12 +477,10 @@
 
         function updateSlider() {
             if (window.innerWidth <= 768) {
-                // Mobile: 1 card à la fois, centré parfaitement
+                // Mobile: 1 card à la fois, centré parfaitement avec marges
                 const cardWidth = slider.children[0].offsetWidth;
-                const containerWidth = container.offsetWidth;
-                const offset = (containerWidth - cardWidth) / 2;
                 
-                slider.style.transform = `translateX(${offset - (currentSlide * cardWidth)}px)`;
+                slider.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
                 
                 // Update dots
                 dots.forEach((dot, index) => {
