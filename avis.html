@@ -15,19 +15,19 @@
             user-select: none;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-            background: #f8f9fa;
-            padding: 40px 20px;
-        }
-
-        .reviews-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            cursor: grab;
-        }
+       body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    background: transparent;
+    padding: 40px 20px;
+}
+      .reviews-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden; 
+    cursor: grab;
+    padding: 0 10px; 
+}
 
         .reviews-container:active {
             cursor: grabbing;
@@ -477,8 +477,8 @@
 
         function updateSlider() {
             if (window.innerWidth <= 768) {
-                // Mobile: 1 card à la fois, centré parfaitement
-                const cardWidth = slider.children[0].offsetWidth + 40; // card width + marges (20px * 2)
+            
+                const cardWidth = slider.children[0].offsetWidth + 40; 
                 
                 slider.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
                 
@@ -487,7 +487,7 @@
                     dot.classList.toggle('active', index === currentSlide);
                 });
             } else {
-                // Desktop: 2 positions (0 ou 1)
+               
                 if (currentSlide === 0) {
                     slider.style.transform = 'translateX(0)';
                 } else {
@@ -499,12 +499,12 @@
 
         function slide(direction) {
             if (window.innerWidth <= 768) {
-                // Mobile: 4 positions
+            
                 currentSlide += direction;
                 if (currentSlide < 0) currentSlide = 3;
                 if (currentSlide > 3) currentSlide = 0;
             } else {
-                // Desktop: 2 positions (toggle)
+                // Desktop: 2 positions 
                 currentSlide = currentSlide === 0 ? 1 : 0;
             }
             
@@ -537,10 +537,10 @@
             }, 5000);
         }
 
-        // Démarrer l'auto-slide
+       
         startAutoSlide();
 
-        // Handle window resize
+       
         window.addEventListener('resize', () => {
             currentSlide = 0;
             updateSlider();
