@@ -180,7 +180,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🐛 Known Issues
 
-None at the moment! If you find any bugs, please [open an issue](https://github.com/RaynoxDevs/google-reviews-widget/issues).
+None at the moment! If you find any bugs, please [open an issue](https://github.com/RaynoxDevs/google-review-widget/issues).
 
 ## 📬 Contact
 
