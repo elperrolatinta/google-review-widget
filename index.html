@@ -49,6 +49,10 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             pointer-events: none;
+            min-height: 320px;
+            max-height: 320px;
+            display: flex;
+            flex-direction: column;
         }
 
         .review-card:hover {
@@ -121,6 +125,7 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
+            flex: 1;
         }
 
         .nav-button {
@@ -153,11 +158,11 @@
         }
 
         .nav-button.prev {
-            left: 10px;
+            left: 5px;
         }
 
         .nav-button.next {
-            right: 10px;
+            right: 5px;
         }
 
         .nav-button svg {
@@ -186,16 +191,23 @@
 
         @media (max-width: 768px) {
             body {
-                padding: 20px 10px;
+                padding: 20px 0;
+            }
+
+            .reviews-container {
+                padding: 0 15px;
             }
 
             .review-card {
-                flex: 0 0 calc(100% - 100px);
+                flex: 0 0 100%;
                 margin: 0;
+                min-height: 350px;
+                max-height: 350px;
             }
             
             .reviews-slider {
-                padding: 20px 50px;
+                padding: 20px 0;
+                gap: 0;
             }
 
             .nav-button {
@@ -209,12 +221,16 @@
                 opacity: 0.5;
             }
 
+            .nav-button:hover {
+                opacity: 0.5;
+            }
+
             .nav-button.prev {
-                left: 10px;
+                left: 20px;
             }
 
             .nav-button.next {
-                right: 10px;
+                right: 20px;
             }
 
             .review-text {
@@ -390,6 +406,15 @@
                 if (!isDragging) return;
                 currentX = e.pageX;
                 dragOffset = currentX - startX;
+                
+                // Résistance sur les bords
+                const maxDrag = 50;
+                if (currentSlide === 0 && dragOffset > 0) {
+                    dragOffset = Math.min(dragOffset * 0.2, maxDrag);
+                } else if (currentSlide === 1 && dragOffset < 0) {
+                    dragOffset = Math.max(dragOffset * 0.2, -maxDrag);
+                }
+                
                 const offset = currentSlide === 0 ? 0 : -slider.children[0].offsetWidth - 20;
                 slider.style.transform = `translateX(${offset + dragOffset}px)`;
             });
@@ -400,10 +425,12 @@
                 slider.style.transition = 'transform 0.4s ease';
                 
                 if (Math.abs(dragOffset) > 50) {
-                    if (dragOffset > 0) {
+                    if (dragOffset > 0 && currentSlide === 1) {
                         manualSlide(-1);
-                    } else {
+                    } else if (dragOffset < 0 && currentSlide === 0) {
                         manualSlide(1);
+                    } else {
+                        updateSlider();
                     }
                 } else {
                     updateSlider();
@@ -447,13 +474,12 @@
 
         function updateSlider() {
             if (window.innerWidth <= 768) {
-                // Mobile: 1 card à la fois, centré
+                // Mobile: 1 card à la fois, centré parfaitement
                 const cardWidth = slider.children[0].offsetWidth;
-                const gap = 20;
                 const containerWidth = container.offsetWidth;
-                const offset = (containerWidth - cardWidth) / 2 - 50; // 50 = padding
+                const offset = (containerWidth - cardWidth) / 2;
                 
-                slider.style.transform = `translateX(${offset - (currentSlide * (cardWidth + gap))}px)`;
+                slider.style.transform = `translateX(${offset - (currentSlide * cardWidth)}px)`;
                 
                 // Update dots
                 dots.forEach((dot, index) => {
