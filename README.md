@@ -36,7 +36,7 @@ A modern, responsive, and interactive Google Reviews carousel widget built with 
 ### Option 1: Direct Download
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/google-reviews-widget.git
+git clone https://github.com/RaynoxDevs/google-reviews-widget.git
 
 # Navigate to the directory
 cd google-reviews-widget
