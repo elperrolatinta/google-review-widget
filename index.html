@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opiniones de elperrolatinta</title>
+
     <style>
         * {
             margin: 0;
@@ -15,19 +16,26 @@
             user-select: none;
         }
 
-       body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    background: transparent;
-    padding: 40px 20px;
-} 
-      .reviews-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden; 
-    cursor: grab;
-    padding: 0 10px; 
-}
+        html,
+        body {
+            overflow: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Helvetica, Arial, sans-serif;
+            background: transparent;
+            padding: 40px 20px;
+        }
+
+        .reviews-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+            padding: 0 10px;
+        }
 
         .reviews-container:active {
             cursor: grabbing;
@@ -45,39 +53,28 @@
             background: white;
             border-radius: 12px;
             padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             pointer-events: none;
+
             min-height: 280px;
             max-height: 280px;
+
             display: flex;
             flex-direction: column;
         }
 
         .review-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
         }
 
         .review-header {
             display: flex;
             align-items: center;
-            gap: 12px;
             margin-bottom: 16px;
-        }
-
-        .review-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #e0e0e0;
-            pointer-events: none;
-            -webkit-user-drag: none;
-            -khtml-user-drag: none;
-            -moz-user-drag: none;
-            -o-user-drag: none;
+            padding-right: 40px;
         }
 
         .review-info {
@@ -120,9 +117,11 @@
             color: #5f6368;
             font-size: 15px;
             line-height: 1.6;
+
             display: -webkit-box;
             -webkit-line-clamp: 6;
             -webkit-box-orient: vertical;
+
             overflow: hidden;
             text-overflow: ellipsis;
             flex: 1;
@@ -132,24 +131,36 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
+
             background: white;
             border: none;
+
             width: 44px;
             height: 44px;
+
             border-radius: 50%;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            transition: all 0.2s ease;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+            transition:
+                opacity 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease,
+                transform 0.2s ease;
+
             z-index: 10;
             opacity: 0.7;
         }
 
         .nav-button:hover {
             opacity: 1;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .nav-button:active {
@@ -174,11 +185,11 @@
             display: none;
             gap: 8px;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .progress-dot {
-            width: 40px;
+            width: 30px;
             height: 4px;
             background: #e0e0e0;
             border-radius: 2px;
@@ -190,6 +201,7 @@
         }
 
         @media (max-width: 768px) {
+
             body {
                 padding: 20px 0;
             }
@@ -199,18 +211,20 @@
                 max-width: 100%;
             }
 
+            .reviews-slider {
+                padding: 20px 0;
+                gap: 0;
+            }
+
             .review-card {
                 flex: 0 0 calc(100vw - 40px);
                 min-width: calc(100vw - 40px);
                 max-width: calc(100vw - 40px);
+
                 margin: 0 20px;
+
                 min-height: 310px;
                 max-height: 310px;
-            }
-            
-            .reviews-slider {
-                padding: 20px 0;
-                gap: 0;
             }
 
             .nav-button {
@@ -219,12 +233,12 @@
                 opacity: 0.5;
             }
 
-            .nav-button:active {
-                background: rgba(0, 0, 0, 0.1);
+            .nav-button:hover {
                 opacity: 0.5;
             }
 
-            .nav-button:hover {
+            .nav-button:active {
+                background: rgba(0, 0, 0, 0.1);
                 opacity: 0.5;
             }
 
@@ -242,38 +256,63 @@
 
             .progress-bar {
                 display: flex;
-                margin-top: 20px;
-            }
-
-            .progress-dot {
-                width: 30px;
             }
         }
     </style>
 </head>
+
 <body>
+
     <div class="reviews-container" id="container">
-        <button class="nav-button prev" onclick="manualSlide(-1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+        <!-- BOTÓN ANTERIOR -->
+
+        <button
+            class="nav-button prev"
+            onclick="manualSlide(-1)"
+            aria-label="Reseña anterior"
+        >
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+            >
                 <path d="M15 18l-6-6 6-6"/>
             </svg>
         </button>
 
+
+        <!-- RESEÑAS -->
+
         <div class="reviews-slider" id="slider">
-            <!-- Review 1 - MARÍA ÁLVAREZ -->
+
+
+            <!-- RESEÑA 1 - MARÍA ÁLVAREZ -->
+
             <div class="review-card">
+
                 <div class="review-header">
                     <div class="review-info">
-                        <div class="review-author">María Álvarez</div>
-                        <div class="review-meta">Reseña de Google • hace 1 semana</div>
+
+                        <div class="review-author">
+                            María Álvarez
+                        </div>
+
+                        <div class="review-meta">
+                            Reseña de Google • hace 1 semana
+                        </div>
+
                     </div>
                 </div>
+
                 <svg class="google-icon" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
+
                 <div class="stars">
                     <span class="star">★</span>
                     <span class="star">★</span>
@@ -281,25 +320,39 @@
                     <span class="star">★</span>
                     <span class="star">★</span>
                 </div>
+
                 <div class="review-text">
                     Le doy 5 estrellas xq no puedo poner más. No solo por el trato impecable del tatuador, jesús, sino por el resultado final. Le había enseñado lo que quería pero él lo retocó y lo rediseñó para que quedase mucho mejor. Espero volver pronto!
                 </div>
+
             </div>
 
-            <!-- Review 2 - ELENA FERRER -->
+
+            <!-- RESEÑA 2 - ELENA FERRER -->
+
             <div class="review-card">
+
                 <div class="review-header">
                     <div class="review-info">
-                        <div class="review-author">Elena Ferrer</div>
-                        <div class="review-meta">Reseña de Google • hace 2 semanas</div>
+
+                        <div class="review-author">
+                            Elena Ferrer
+                        </div>
+
+                        <div class="review-meta">
+                            Reseña de Google • hace 2 semanas
+                        </div>
+
                     </div>
                 </div>
+
                 <svg class="google-icon" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
+
                 <div class="stars">
                     <span class="star">★</span>
                     <span class="star">★</span>
@@ -307,25 +360,39 @@
                     <span class="star">★</span>
                     <span class="star">★</span>
                 </div>
+
                 <div class="review-text">
                     Muy contenta la verdad, le pedí al tatuador que me hiciese un diseño desde cero y no puedo tener queja, es precioso pero algo diferente a los demás que ya tengo. Además me ha curado sin problema. Volvería sin dudas
                 </div>
+
             </div>
 
-            <!-- Review 3 - ÓSCAR CUESTA -->
+
+            <!-- RESEÑA 3 - ÓSCAR CUESTA -->
+
             <div class="review-card">
+
                 <div class="review-header">
                     <div class="review-info">
-                        <div class="review-author">Óscar Cuesta</div>
-                        <div class="review-meta">Reseña de Google • hace 2 semanas</div>
+
+                        <div class="review-author">
+                            Óscar Cuesta
+                        </div>
+
+                        <div class="review-meta">
+                            Reseña de Google • hace 2 semanas
+                        </div>
+
                     </div>
                 </div>
+
                 <svg class="google-icon" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
+
                 <div class="stars">
                     <span class="star">★</span>
                     <span class="star">★</span>
@@ -333,25 +400,39 @@
                     <span class="star">★</span>
                     <span class="star">★</span>
                 </div>
+
                 <div class="review-text">
                     Me he tatuado varias veces con él y siempre he quedado más que contento con el resultado, además de que el trato al cliente y el ambiente es muy acogedor. Además higiene del estudio es impecable, a la altura de un gran profesional.
                 </div>
+
             </div>
 
-            <!-- Review 4 - MARCOS CELORIO -->
+
+            <!-- RESEÑA 4 - MARCOS CELORIO -->
+
             <div class="review-card">
+
                 <div class="review-header">
                     <div class="review-info">
-                        <div class="review-author">Marcos Celorio</div>
-                        <div class="review-meta">Reseña de Google • hace 1 mes</div>
+
+                        <div class="review-author">
+                            Marcos Celorio
+                        </div>
+
+                        <div class="review-meta">
+                            Reseña de Google • hace 1 mes
+                        </div>
+
                     </div>
                 </div>
+
                 <svg class="google-icon" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
+
                 <div class="stars">
                     <span class="star">★</span>
                     <span class="star">★</span>
@@ -359,24 +440,39 @@
                     <span class="star">★</span>
                     <span class="star">★</span>
                 </div>
+
                 <div class="review-text">
                     Muy profesional y súper atento a cada detalle, repetiré sin ninguna duda.
                 </div>
+
             </div>
-                               <!-- Review 5 - ÓSCAR CAPÍN -->
+
+
+            <!-- RESEÑA 5 - ÓSCAR CAPÍN -->
+
             <div class="review-card">
+
                 <div class="review-header">
                     <div class="review-info">
-                        <div class="review-author">Óscar Capín</div>
-                        <div class="review-meta">Reseña de Google • hace 3 semanas</div>
+
+                        <div class="review-author">
+                            Óscar Capín
+                        </div>
+
+                        <div class="review-meta">
+                            Reseña de Google • hace 3 semanas
+                        </div>
+
                     </div>
                 </div>
+
                 <svg class="google-icon" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
+
                 <div class="stars">
                     <span class="star">★</span>
                     <span class="star">★</span>
@@ -384,192 +480,401 @@
                     <span class="star">★</span>
                     <span class="star">★</span>
                 </div>
+
                 <div class="review-text">
                     Le doy cinco (5) estrellas 🌟 porque no le puedo dar 6 (seis). El mejor tatuador de la zona. No doy más declaraciones
                 </div>
+
             </div>
+
+
         </div>
 
 
-        <button class="nav-button next" onclick="manualSlide(1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- BOTÓN SIGUIENTE -->
+
+        <button
+            class="nav-button next"
+            onclick="manualSlide(1)"
+            aria-label="Siguiente reseña"
+        >
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+            >
                 <path d="M9 18l6-6-6-6"/>
             </svg>
         </button>
 
-        <div class="progress-bar">
-            <div class="progress-dot active"></div>
-            <div class="progress-dot"></div>
-            <div class="progress-dot"></div>
-            <div class="progress-dot"></div>
-        </div>
+
+        <!-- LOS PUNTOS SE CREAN AUTOMÁTICAMENTE -->
+
+        <div class="progress-bar" id="progressBar"></div>
+
     </div>
 
+
     <script>
+
         let currentSlide = 0;
-        const slider = document.getElementById('slider');
-        const container = document.getElementById('container');
-        const dots = document.querySelectorAll('.progress-dot');
+
+        const slider = document.getElementById("slider");
+        const container = document.getElementById("container");
+        const progressBar = document.getElementById("progressBar");
+
         let autoSlideInterval;
         let autoSlidePaused = false;
-        const isMobile = window.innerWidth <= 768;
 
-        // Swipe avec souris (desktop)
         let isDragging = false;
         let startX = 0;
-        let currentX = 0;
         let dragOffset = 0;
 
-        if (!isMobile) {
-            container.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                startX = e.pageX;
-                slider.style.transition = 'none';
-            });
-
-            container.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                currentX = e.pageX;
-                dragOffset = currentX - startX;
-                
-                // Résistance sur les bords
-                const maxDrag = 50;
-                if (currentSlide === 0 && dragOffset > 0) {
-                    dragOffset = Math.min(dragOffset * 0.2, maxDrag);
-                } else if (currentSlide === 1 && dragOffset < 0) {
-                    dragOffset = Math.max(dragOffset * 0.2, -maxDrag);
-                }
-                
-                const offset = currentSlide === 0 ? 0 : -slider.children[0].offsetWidth - 20;
-                slider.style.transform = `translateX(${offset + dragOffset}px)`;
-            });
-
-            container.addEventListener('mouseup', () => {
-                if (!isDragging) return;
-                isDragging = false;
-                slider.style.transition = 'transform 0.4s ease';
-                
-                if (Math.abs(dragOffset) > 50) {
-                    if (dragOffset > 0 && currentSlide === 1) {
-                        manualSlide(-1);
-                    } else if (dragOffset < 0 && currentSlide === 0) {
-                        manualSlide(1);
-                    } else {
-                        updateSlider();
-                    }
-                } else {
-                    updateSlider();
-                }
-                dragOffset = 0;
-            });
-
-            container.addEventListener('mouseleave', () => {
-                if (isDragging) {
-                    isDragging = false;
-                    slider.style.transition = 'transform 0.4s ease';
-                    updateSlider();
-                    dragOffset = 0;
-                }
-            });
-        }
-
-        // Swipe tactile (mobile)
         let touchStartX = 0;
         let touchEndX = 0;
 
-        container.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
 
-        container.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
+        /* ---------------------------------
+           CANTIDAD DE RESEÑAS
+        --------------------------------- */
 
-        function handleSwipe() {
-            const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) {
+        function getTotalReviews() {
+            return slider.children.length;
+        }
+
+
+        /* ---------------------------------
+           PUNTOS DE MÓVIL AUTOMÁTICOS
+        --------------------------------- */
+
+        function createProgressDots() {
+
+            progressBar.innerHTML = "";
+
+            const totalReviews = getTotalReviews();
+
+            for (let i = 0; i < totalReviews; i++) {
+
+                const dot = document.createElement("div");
+
+                dot.classList.add("progress-dot");
+
+                if (i === currentSlide) {
+                    dot.classList.add("active");
+                }
+
+                progressBar.appendChild(dot);
+            }
+        }
+
+
+        function updateProgressDots() {
+
+            const dots =
+                progressBar.querySelectorAll(".progress-dot");
+
+            dots.forEach((dot, index) => {
+
+                dot.classList.toggle(
+                    "active",
+                    index === currentSlide
+                );
+
+            });
+        }
+
+
+        /* ---------------------------------
+           NÚMERO DE POSICIONES
+        --------------------------------- */
+
+        function getMaxSlide() {
+
+            const totalReviews = getTotalReviews();
+
+            if (window.innerWidth <= 768) {
+
+                return totalReviews - 1;
+
+            }
+
+            const visibleCards = 3;
+
+            return Math.max(
+                0,
+                totalReviews - visibleCards
+            );
+        }
+
+
+        /* ---------------------------------
+           ACTUALIZAR CARRUSEL
+        --------------------------------- */
+
+        function updateSlider() {
+
+            if (window.innerWidth <= 768) {
+
+                const card =
+                    slider.children[0];
+
+                const cardWidth =
+                    card.offsetWidth + 40;
+
+                slider.style.transform =
+                    `translateX(-${currentSlide * cardWidth}px)`;
+
+                updateProgressDots();
+
+            } else {
+
+                const cardWidth =
+                    slider.children[0].offsetWidth;
+
+                slider.style.transform =
+                    `translateX(-${currentSlide * (cardWidth + 20)}px)`;
+
+            }
+        }
+
+
+        /* ---------------------------------
+           CAMBIAR RESEÑA
+        --------------------------------- */
+
+        function slide(direction) {
+
+            const maxSlide = getMaxSlide();
+
+            currentSlide += direction;
+
+            if (currentSlide < 0) {
+                currentSlide = maxSlide;
+            }
+
+            if (currentSlide > maxSlide) {
+                currentSlide = 0;
+            }
+
+            updateSlider();
+        }
+
+
+        /* ---------------------------------
+           BOTONES
+        --------------------------------- */
+
+        function manualSlide(direction) {
+
+            slide(direction);
+
+            pauseAutoSlide();
+        }
+
+
+        /* ---------------------------------
+           ARRASTRAR CON RATÓN
+        --------------------------------- */
+
+        container.addEventListener(
+            "mousedown",
+            (event) => {
+
+                if (window.innerWidth <= 768) {
+                    return;
+                }
+
+                isDragging = true;
+
+                startX = event.pageX;
+
+                dragOffset = 0;
+
+                slider.style.transition = "none";
+            }
+        );
+
+
+        container.addEventListener(
+            "mousemove",
+            (event) => {
+
+                if (
+                    !isDragging ||
+                    window.innerWidth <= 768
+                ) {
+                    return;
+                }
+
+                dragOffset =
+                    event.pageX - startX;
+
+                const cardWidth =
+                    slider.children[0].offsetWidth;
+
+                const baseOffset =
+                    currentSlide * (cardWidth + 20);
+
+                slider.style.transform =
+                    `translateX(${-(baseOffset) + dragOffset}px)`;
+            }
+        );
+
+
+        function finishDragging() {
+
+            if (!isDragging) {
+                return;
+            }
+
+            isDragging = false;
+
+            slider.style.transition =
+                "transform 0.4s ease";
+
+            if (Math.abs(dragOffset) > 50) {
+
+                if (dragOffset < 0) {
                     manualSlide(1);
                 } else {
                     manualSlide(-1);
                 }
-            }
-        }
 
-        function updateSlider() {
-            if (window.innerWidth <= 768) {
-            
-                const cardWidth = slider.children[0].offsetWidth + 40; 
-                
-                slider.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
-                
-                // Update dots
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentSlide);
-                });
             } else {
-               
-                if (currentSlide === 0) {
-                    slider.style.transform = 'translateX(0)';
-                } else {
-                    const cardWidth = slider.children[0].offsetWidth;
-                    slider.style.transform = `translateX(-${cardWidth + 20}px)`;
-                }
+
+                updateSlider();
+
             }
+
+            dragOffset = 0;
         }
 
-        function slide(direction) {
-            if (window.innerWidth <= 768) {
-            
-                currentSlide += direction;
-                if (currentSlide < 0) currentSlide = 3;
-                if (currentSlide > 3) currentSlide = 0;
+
+        container.addEventListener(
+            "mouseup",
+            finishDragging
+        );
+
+
+        container.addEventListener(
+            "mouseleave",
+            finishDragging
+        );
+
+
+        /* ---------------------------------
+           SWIPE EN MÓVIL
+        --------------------------------- */
+
+        container.addEventListener(
+            "touchstart",
+            (event) => {
+
+                touchStartX =
+                    event.changedTouches[0].screenX;
+            },
+            { passive: true }
+        );
+
+
+        container.addEventListener(
+            "touchend",
+            (event) => {
+
+                touchEndX =
+                    event.changedTouches[0].screenX;
+
+                handleSwipe();
+            },
+            { passive: true }
+        );
+
+
+        function handleSwipe() {
+
+            const difference =
+                touchStartX - touchEndX;
+
+            if (Math.abs(difference) <= 50) {
+                return;
+            }
+
+            if (difference > 0) {
+                manualSlide(1);
             } else {
-                // Desktop: 2 positions 
-                currentSlide = currentSlide === 0 ? 1 : 0;
+                manualSlide(-1);
             }
-            
-            updateSlider();
         }
 
-        function manualSlide(direction) {
-            slide(direction);
-            pauseAutoSlide();
+
+        /* ---------------------------------
+           MOVIMIENTO AUTOMÁTICO
+        --------------------------------- */
+
+        function startAutoSlide() {
+
+            clearInterval(autoSlideInterval);
+
+            if (autoSlidePaused) {
+                return;
+            }
+
+            autoSlideInterval =
+                setInterval(() => {
+
+                    if (!autoSlidePaused) {
+                        slide(1);
+                    }
+
+                }, 5000);
         }
+
 
         function pauseAutoSlide() {
+
             clearInterval(autoSlideInterval);
+
             autoSlidePaused = true;
-            
+
             setTimeout(() => {
+
                 autoSlidePaused = false;
+
                 startAutoSlide();
+
             }, 15000);
         }
 
-        function startAutoSlide() {
-            clearInterval(autoSlideInterval);
-            if (autoSlidePaused) return;
-            
-            autoSlideInterval = setInterval(() => {
-                if (!autoSlidePaused) {
-                    slide(1);
-                }
-            }, 5000);
-        }
 
-       
+        /* ---------------------------------
+           CAMBIO DE TAMAÑO
+        --------------------------------- */
+
+        window.addEventListener(
+            "resize",
+            () => {
+
+                currentSlide = 0;
+
+                createProgressDots();
+
+                updateSlider();
+            }
+        );
+
+
+        /* ---------------------------------
+           INICIO
+        --------------------------------- */
+
+        createProgressDots();
+
+        updateSlider();
+
         startAutoSlide();
 
-       
-        window.addEventListener('resize', () => {
-            currentSlide = 0;
-            updateSlider();
-        });
-
-        // Init
-        updateSlider();
     </script>
+
 </body>
 </html>
